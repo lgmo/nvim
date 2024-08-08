@@ -3,4 +3,5 @@ return {
     'github/copilot.vim',
     'eandrju/cellular-automaton.nvim',
     'mhinz/vim-signify',
+    { 'wakatime/vim-wakatime', lazy = false },
 }
