@@ -30,6 +30,8 @@ return {
                 'rust_analyzer',
                 'tsserver',
                 'gopls',
+                'pyright',
+                'ruff',
             },
             handlers = {
                 function(server_name)

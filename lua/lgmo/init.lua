@@ -1,39 +1,55 @@
-require('lgmo.remap')
-require('lgmo.lazy_init')
-require('lgmo.set')
+require 'lgmo.lazy_init'
+require 'lgmo.mappings'
+require 'lgmo.opt'
+require 'lgmo.appearence'
 
-vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+-- local lsps = require 'lgmo.lsps'
+-- 
+-- for _, setup in ipairs(lsps) do
+--     -- vim.lsp.config[setup.name] = setup.config
+--     vim.api.nvim_create_autocmd('BufEnter', {
+--         pattern = setup.patterns,
+--         callback = function(ev)
+--             vim.lsp.config[setup.name] = setup.cfg
+--             vim.lsp.enable(setup.name)
+--             if type(setup.init_config) == "function" then
+--                 print('so far so good')
+--                 setup.init_config()
+--             end
+--         end,
+--     })
+-- end
 
-local augroup = vim.api.nvim_create_augroup
-local LgmoGroup = augroup('lgmo', {})
 
-local autocmd = vim.api.nvim_create_autocmd
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--     pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
+--     callback = function(ev)
+--         vim.lsp.config['ts_ls'] = { 
+--             cmd = { 'typescript-language-server', '--stdio' }, 
+--             filetypes = { 'js', 'jsx', 'ts', 'tsx', 'javascript' }, 
+--             root_makers = { { 'package.json' }, '.git' } 
+--         }
+--         vim.lsp.enable('ts_ls')
+--         -- print('we did it', setup.name)
+--         -- vim.lsp.enable(setup.name)
+--     end,
+-- })
 
-autocmd('LspAttach', {
-    group = LgmoGroup,
-    callback = function(e)
-        local opts = { buffer = e.buf }
-        vim.keymap.set(
-            'n', 'gd', function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set('n', '<leader>vws', function()
-            vim.lsp.buf.workspace_symbol()
-        end, opts)
-        vim.keymap.set('n', '<leader>vd', function()
-            vim.diagnostic.open_float() end, opts
-        )
-        vim.keymap.set('n', '<leader>vca', function()
-            vim.lsp.buf.code_action() end, opts
-        )
-        vim.keymap.set('n', '<leader>vrr', function()
-            vim.lsp.buf.references() end, opts
-        )
-        vim.keymap.set('n', '<leader>vrn', function()
-            vim.lsp.buf.rename() end, opts
-        )
-        vim.keymap.set('i', '<C-h>', function()
-            vim.lsp.buf.signature_help() end, opts
-        )
-    end
-})
+
+
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'lua',
+--   callback = function(ev)
+--     vim.lsp.start({
+--       name = 'lua_ls',
+--       cmd = {'lua-language-server'},
+-- 
+--       -- Set the "root directory" to the parent directory of the file in the
+--       -- current buffer (`ev.buf`) that contains either a "setup.py" or a
+--       -- "pyproject.toml" file. Files that share a root directory will reuse
+--       -- the connection to the same LSP server.
+--       root_dir = vim.fs.root(ev.buf, { { '.luarc.json', '.luarc.jsonc' }, '.git' }),
+--     })
+--   end,
+-- })
 

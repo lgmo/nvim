@@ -1,1 +1,1 @@
-require("lgmo")
+require 'lgmo'

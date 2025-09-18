@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -14,4 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
     spec = 'lgmo.lazy',
     change_detection = { notify = false },
+    install = { colorscheme = { 'rose-pine'} },
+    checker = { enabled = true },
 }
