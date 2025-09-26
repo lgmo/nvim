@@ -34,6 +34,7 @@ return {
                 'c',
                 'lua',
                 'rust',
+                'terraform'
             },
 
             sync_install = false,
@@ -49,8 +50,8 @@ return {
                 additional_vim_regex_highlighting = { 'markdown' },
             },
         })
-        local treesitter_parser_config = require('nvim-treesitter.parsers')
-            .get_parser_configs()
+
+        local treesitter_parser_config = require('nvim-treesitter.parsers').get_parser_configs()
         treesitter_parser_config.templ = {
             install_info = {
                 url = 'https://github.com/vrischmann/tree-sitter-templ.git',
@@ -59,6 +60,13 @@ return {
             },
         }
         vim.treesitter.language.register('templ', 'templ')
+
+        vim.api.nvim_create_autocmd('BufEnter', {
+            pattern = '*',
+            callback = function(ev)
+                vim.cmd('TSEnable highlight')
+            end,
+        })
     end
  -- require'nvim-treesitter.configs'.setup {
         --}

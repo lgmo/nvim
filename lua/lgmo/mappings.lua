@@ -8,8 +8,8 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Worktree view' })
 vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<leader>bp', ':bprev<CR>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = 'New tab' })
-vim.keymap.set('n', '<leader>tp', ':tabn<CR>', { desc = 'Go to next tab' })
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>', { desc = 'Go to prev tab' })
+vim.keymap.set('n', '<leader>tl', ':tabn<CR>', { desc = 'Go to next tab' })
+vim.keymap.set('n', '<leader>th', ':tabp<CR>', { desc = 'Go to prev tab' })
 vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Close tab' })
 
 vim.keymap.set('n', '<C-Up>', ':resize +1<CR>', { desc = 'Increase window height' })
@@ -30,7 +30,6 @@ function find_in_list(val, list)
     end
     return false
 end
-
 
 function ts_move_helper(node_types, move_type)
     local ts_utils = require 'nvim-treesitter.ts_utils'
@@ -53,26 +52,26 @@ function ts_move_helper(node_types, move_type)
 end
 
 function next_matching_node(node_types)
-    local ts_utils = require'nvim-treesitter.ts_utils'
-  local node = ts_utils.get_node_at_cursor()
-  if not node then return nil end
+    local ts_utils = require 'nvim-treesitter.ts_utils'
+    local node = ts_utils.get_node_at_cursor()
+    if not node then return nil end
 
-  local root = node:root()
-  local current = node
+    local root = node:root()
+    local current = node
 
-  while current do
-    local sibling = current:next_named_sibling()
-    while sibling do
-      if find_in_list(sibling:type(), node_types) then
-        return sibling
-      end
-      sibling = sibling:next_named_sibling()
+    while current do
+        local sibling = current:next_named_sibling()
+        while sibling do
+            if find_in_list(sibling:type(), node_types) then
+                return sibling
+            end
+            sibling = sibling:next_named_sibling()
+        end
+        current = current:parent()
+        if current == root then break end
     end
-    current = current:parent()
-    if current == root then break end
-  end
 
-  return nil  -- não encontrou
+    return nil -- não encontrou
 end
 
 function ts_move_next_helper(node_types, move_type)
@@ -87,26 +86,26 @@ function ts_move_next_helper(node_types, move_type)
 end
 
 function prev_matching_node(node_types)
-    local ts_utils = require'nvim-treesitter.ts_utils'
-  local node = ts_utils.get_node_at_cursor()
-  if not node then return nil end
+    local ts_utils = require 'nvim-treesitter.ts_utils'
+    local node = ts_utils.get_node_at_cursor()
+    if not node then return nil end
 
-  local root = node:root()
-  local current = node
+    local root = node:root()
+    local current = node
 
-  while current do
-    local sibling = current:prev_named_sibling()
-    while sibling do
-      if find_in_list(sibling:type(), node_types) then
-        return sibling
-      end
-      sibling = sibling:prev_named_sibling()
+    while current do
+        local sibling = current:prev_named_sibling()
+        while sibling do
+            if find_in_list(sibling:type(), node_types) then
+                return sibling
+            end
+            sibling = sibling:prev_named_sibling()
+        end
+        current = current:parent()
+        if current == root then break end
     end
-    current = current:parent()
-    if current == root then break end
-  end
 
-  return nil  -- não encontrou
+    return nil -- não encontrou
 end
 
 function ts_move_prev_helper(node_types, move_type)
@@ -122,7 +121,7 @@ end
 
 vim.keymap.set('n', ']f', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'function_definition', 'function_declaration', 'decorated_definition' },
             'end_row'
@@ -132,7 +131,7 @@ end, { desc = 'Go to the end of the function' })
 
 vim.keymap.set('n', '[f', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'function_definition', 'function_declaration', 'decorated_definition' },
             'start_row'
@@ -142,7 +141,7 @@ end, { desc = 'Go to the start of the function' })
 
 vim.keymap.set('v', ']f', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'function_definition', 'function_declaration', 'decorated_definition' },
             'end_row'
@@ -152,7 +151,7 @@ end, { desc = 'Go to the end of the function' })
 
 vim.keymap.set('v', '[f', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'function_definition', 'function_declaration', 'decorated_definition' },
             'start_row'
@@ -162,7 +161,7 @@ end, { desc = 'Go to the start of the function' })
 
 vim.keymap.set('n', '<leader>fn', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_next_helper(
             { 'function_definition', 'function_declaration', 'decorated_definition' },
             'start_row'
@@ -172,9 +171,9 @@ end, { desc = 'Go to the next function' })
 
 vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_prev_helper(
-            { 'function_definition','function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition' },
             'start_row'
         )
     end
@@ -182,7 +181,7 @@ end, { desc = 'Go to the previews function' })
 
 vim.keymap.set('v', '<leader>fn', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_next_helper(
             { 'function_definition', 'function_declaration', 'decorated_definition' },
             'start_row'
@@ -192,9 +191,9 @@ end, { desc = 'Go to the next function' })
 
 vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_prev_helper(
-            { 'function_definition','function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition' },
             'start_row'
         )
     end
@@ -202,7 +201,7 @@ end, { desc = 'Go to the previews function' })
 
 vim.keymap.set('n', ']c', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'class_definition' },
             'end_row'
@@ -212,7 +211,7 @@ end, { desc = 'Go to the end of the class' })
 
 vim.keymap.set('n', '[c', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'class_definition' },
             'start_row'
@@ -222,7 +221,7 @@ end, { desc = 'Go to the start of the class' })
 
 vim.keymap.set('v', ']c', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'class_definition' },
             'end_row'
@@ -232,7 +231,7 @@ end, { desc = 'Go to the end of the class' })
 
 vim.keymap.set('v', '[c', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_helper(
             { 'class_definition' },
             'start_row'
@@ -242,7 +241,7 @@ end, { desc = 'Go to the start of the class' })
 
 vim.keymap.set('n', '<leader>cn', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_next_helper(
             { 'class_definition' },
             'start_row'
@@ -252,7 +251,7 @@ end, { desc = 'Go to the next class' })
 
 vim.keymap.set('n', '<leader>cp', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_prev_helper(
             { 'class_definition' },
             'start_row'
@@ -263,7 +262,7 @@ end, { desc = 'Go to the previews class' })
 
 vim.keymap.set('v', '<leader>cn', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_next_helper(
             { 'class_definition' },
             'start_row'
@@ -273,7 +272,7 @@ end, { desc = 'Go to the next class' })
 
 vim.keymap.set('v', '<leader>cp', function()
     local count = vim.v.count1
-    for _ = 1, count do 
+    for _ = 1, count do
         ts_move_prev_helper(
             { 'class_definition' },
             'start_row'
@@ -291,7 +290,7 @@ vim.keymap.set('n', '<leader>O', function()
         table.insert(lines, "")
     end
     vim.api.nvim_buf_set_lines(0, row, row, false, lines)
-    vim.api.nvim_win_set_cursor(0, {row+1, 0})
+    vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
 end, { desc = 'Add new line(s) above' })
 
 -- Adiciona linhas abaixo com count
@@ -303,7 +302,7 @@ vim.keymap.set('n', '<leader>oo', function()
         table.insert(lines, "")
     end
     vim.api.nvim_buf_set_lines(0, row, row, false, lines)
-    vim.api.nvim_win_set_cursor(0, {row+count, 0})
+    vim.api.nvim_win_set_cursor(0, { row + count, 0 })
 end, { desc = 'Add new line(s) below' })
 
 -- vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
@@ -315,4 +314,3 @@ vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("v", "<leader>ca", vim.lsp.buf.code_action)
-
