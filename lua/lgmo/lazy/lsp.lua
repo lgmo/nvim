@@ -35,7 +35,6 @@ return {
             },
             handlers = {
                 function(server_name)
-                    print('setting up', server_name)
                     require('lspconfig')[server_name].setup {
                         capabilities = capabilities,
                     }
@@ -71,7 +70,7 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
-            },{
+            }, {
                 { name = 'buffer' },
             })
         }
