@@ -15,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
     spec = 'lgmo.lazy',
-    change_detection = { notify = false },
     install = { colorscheme = { 'rose-pine'} },
-    checker = { enabled = true },
+    checker = { enabled = true,  notify = false },
 }
