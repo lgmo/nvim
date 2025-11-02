@@ -38,3 +38,5 @@ vim.opt.autoread = true
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand('~/.nvim/undodir')
+
+vim.opt.foldmethod = 'indent'
