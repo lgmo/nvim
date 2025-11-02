@@ -119,83 +119,67 @@ function ts_move_prev_helper(node_types, move_type)
     end
 end
 
+local function_like_node_names = {
+    'function_definition',
+    'function_declaration',
+    'decorated_definition',
+    'arrow_function',
+    'method_definition',
+}
+
 vim.keymap.set('n', ']f', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'end_row'
-        )
+        ts_move_helper(function_like_node_names, 'end_row')
     end
 end, { desc = 'Go to the end of the function' })
 
 vim.keymap.set('n', '[f', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'start_row'
-        )
+        ts_move_helper(function_like_node_names, 'start_row')
     end
 end, { desc = 'Go to the start of the function' })
 
 vim.keymap.set('v', ']f', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'end_row'
-        )
+        ts_move_helper(function_like_node_names, 'end_row')
     end
 end, { desc = 'Go to the end of the function' })
 
 vim.keymap.set('v', '[f', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'start_row'
-        )
+        ts_move_helper(function_like_node_names, 'start_row')
     end
 end, { desc = 'Go to the start of the function' })
 
 vim.keymap.set('n', '<leader>fn', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_next_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'start_row'
-        )
+        ts_move_next_helper(function_like_node_names, 'start_row')
     end
 end, { desc = 'Go to the next function' })
 
 vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_prev_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'start_row'
-        )
+        ts_move_prev_helper(function_like_node_names,'start_row')
     end
 end, { desc = 'Go to the previews function' })
 
 vim.keymap.set('v', '<leader>fn', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_next_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'start_row'
-        )
+        ts_move_next_helper(function_like_node_names,'start_row')
     end
 end, { desc = 'Go to the next function' })
 
 vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_prev_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
-            'start_row'
-        )
+        ts_move_prev_helper(function_like_node_names,'start_row')
     end
 end, { desc = 'Go to the previews function' })
 
