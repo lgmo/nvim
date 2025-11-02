@@ -3,7 +3,7 @@ return {
     branch = 'master',
     lazy = false,
     build = ':TSUpdate',
-    -- opts = function() 
+    -- opts = function()
     --         vim.api.nvim_create_autocmd('BufEnter', {
     --             pattern = '*',
     --             callback = function(ev)
@@ -11,7 +11,7 @@ return {
     --             end,
     --         })
     --         return {
-    --         ensure_installed = { 
+    --         ensure_installed = {
     --             "c",
     --             "lua",
     --             "vim",
@@ -68,8 +68,7 @@ return {
             end,
         })
     end
- -- require'nvim-treesitter.configs'.setup {
-        --}
-        --end
+    -- require'nvim-treesitter.configs'.setup {
+    --}
+    --end
 }
-

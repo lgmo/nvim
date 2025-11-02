@@ -123,7 +123,7 @@ vim.keymap.set('n', ']f', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'end_row'
         )
     end
@@ -133,7 +133,7 @@ vim.keymap.set('n', '[f', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'start_row'
         )
     end
@@ -143,7 +143,7 @@ vim.keymap.set('v', ']f', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'end_row'
         )
     end
@@ -153,7 +153,7 @@ vim.keymap.set('v', '[f', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'start_row'
         )
     end
@@ -163,7 +163,7 @@ vim.keymap.set('n', '<leader>fn', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_next_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'start_row'
         )
     end
@@ -173,7 +173,7 @@ vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_prev_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'start_row'
         )
     end
@@ -183,7 +183,7 @@ vim.keymap.set('v', '<leader>fn', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_next_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'start_row'
         )
     end
@@ -193,7 +193,7 @@ vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_prev_helper(
-            { 'function_definition', 'function_declaration', 'decorated_definition' },
+            { 'function_definition', 'function_declaration', 'decorated_definition', 'arrow_function' },
             'start_row'
         )
     end
@@ -314,3 +314,9 @@ vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("v", "<leader>ca", vim.lsp.buf.code_action)
+
+vim.keymap.set("v", ">", ">gv", { desc = "Indent preserving selection" })
+vim.keymap.set("v", "<", "<gv", { desc = "Unindent preserving selection" })
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
