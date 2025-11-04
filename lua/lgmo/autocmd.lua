@@ -11,10 +11,19 @@ end
 local eva_autocmds = vim.api.nvim_create_augroup('EvaConfig', { clear = true })
 
 vim.api.nvim_create_autocmd(
-    { 'VimEnter' },
+    'VimEnter',
     {
         group = eva_autocmds,
         pattern = '*',
         callback = check_is_eva_project_and_run_eva_cmd,
+    }
+)
+
+vim.api.nvim_create_autocmd(
+    'FileType',
+    {
+        pattern = 'TelescopeResults',
+        command = [[setlocal nofoldenable]],
+        desc = 'Disable folding in telescope results',
     }
 )
