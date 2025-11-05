@@ -1,0 +1,3 @@
+return {
+    'mlopes/vim-farin',
+}
