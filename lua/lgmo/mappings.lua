@@ -165,21 +165,21 @@ end, { desc = 'Go to the next function' })
 vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_prev_helper(function_like_node_names,'start_row')
+        ts_move_prev_helper(function_like_node_names, 'start_row')
     end
 end, { desc = 'Go to the previews function' })
 
 vim.keymap.set('v', '<leader>fn', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_next_helper(function_like_node_names,'start_row')
+        ts_move_next_helper(function_like_node_names, 'start_row')
     end
 end, { desc = 'Go to the next function' })
 
 vim.keymap.set('n', '<leader>fp', function()
     local count = vim.v.count1
     for _ = 1, count do
-        ts_move_prev_helper(function_like_node_names,'start_row')
+        ts_move_prev_helper(function_like_node_names, 'start_row')
     end
 end, { desc = 'Go to the previews function' })
 
@@ -304,3 +304,4 @@ vim.keymap.set("v", "<", "<gv", { desc = "Unindent preserving selection" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
