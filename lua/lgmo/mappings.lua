@@ -304,4 +304,24 @@ vim.keymap.set("v", "<", "<gv", { desc = "Unindent preserving selection" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-vim.keymap.set("n", "<space>fb", ":Dirs<CR>")
+vim.keymap.set("n", "<leader>fd", ":Dirs<CR>")
+
+-- add mark when moving [hjkl] with count to enable C-o 
+local function mark_if_count_gt1(key)
+  return string.format([[v:count > 1 ? "m'" .. v:count .. "%s" : "%s"]], key, key)
+end
+vim.api.nvim_set_keymap('n', 'k', mark_if_count_gt1('k'), { expr = true, noremap = true })
+vim.api.nvim_set_keymap('n', 'j', mark_if_count_gt1('j'), { expr = true, noremap = true })
+vim.api.nvim_set_keymap('n', 'h', mark_if_count_gt1('h'), { expr = true, noremap = true })
+vim.api.nvim_set_keymap('n', 'l', mark_if_count_gt1('l'), { expr = true, noremap = true })
+
+local ls = require("luasnip")
+vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})

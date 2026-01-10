@@ -33,6 +33,20 @@ return {
             },
             handlers = {
                 function(server_name)
+                    if server_name == 'denols' then
+                        vim.lsp.config('denols', {
+                            capabilities = capabilities,
+                            root_dir = function(fname)
+                                return lspconfig.util.root_pattern("package.json", "deno.json", "deno.jsonc")(fname) or vim.fn.getcwd()
+                            end,
+                            settings = {
+                                deno = {
+                                    enable = false,
+                                },
+                            },
+                        })
+                        return
+                    end
                     vim.lsp.config(server_name, {
                         capabilities = capabilities,
                     })
@@ -47,7 +61,7 @@ return {
                             }
                         }
                     })
-                end
+                end,
             },
         }
 

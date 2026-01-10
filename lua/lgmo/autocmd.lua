@@ -59,9 +59,13 @@ local function scan_dirs(root)
     return results
 end
 
-vim.api.nvim_create_user_command("Dirs", function()
+vim.api.nvim_create_user_command("Dirsau", function()
     local root = vim.loop.cwd()
     local dirs = scan_dirs(root)
+    for i, dir in ipairs(dirs) do
+        -- Remove o prefixo root + o separador de caminho
+        dirs[i] = dir:sub(#root + 2)  -- +2 para remover também a barra (/ ou \)
+    end
 
     pickers.new({}, {
         prompt_title = "Directories",
