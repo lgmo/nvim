@@ -82,3 +82,17 @@ vim.api.nvim_create_user_command(
     end,
     {}
 )
+
+vim.api.nvim_create_user_command(
+    'LnesRef',
+    function(opts)
+        local file = vim.fn.expand('%')
+        local start_ln = opts.line1
+        local end_ln = opts.line2
+        
+        local res = string.format("%s: lines %d to %d", file, start_ln, end_ln)
+        vim.fn.setreg('+', res)
+        print("Copiado: " .. res)
+    end,
+    { range = true }
+)

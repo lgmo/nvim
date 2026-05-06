@@ -62,6 +62,19 @@ return {
                         }
                     })
                 end,
+                ['vtsls'] = function()
+                    vim.lsp.config('vtsls', {
+                        settings = {
+                            typescript = {
+                                preferences = {
+                                    includeCompletionsForModuleExports = true,
+                                    includeCompletionsForImportStatements = true,
+                                    importModuleSpecifier = "non-relative",
+                                },
+                            },
+                        },
+                    })
+                end,
             },
         }
 

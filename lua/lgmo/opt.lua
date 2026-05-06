@@ -40,3 +40,5 @@ vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand('~/.nvim/undodir')
 
 vim.opt.foldmethod = 'indent'
+vim.opt.wrap = false
+vim.backupdir= '~/.vim/backups//'

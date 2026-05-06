@@ -16,6 +16,14 @@ return {
                 -- rust = { "rustfmt", lsp_format = "fallback" },
                 -- Conform will run the first available formatter
                 -- javascript = { "prettierd", "prettier", stop_after_first = true },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
+            },
+            formatters = {
+                ["clang-format"] = {
+                    -- Garante que ele procure o arquivo .clang-format no projeto
+                    prepend_args = { "--style=file" },
+                },
             },
             format_on_save = function(bufnr)
                 return { timeout_ms = 3000, lsp_fallback = true }
