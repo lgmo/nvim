@@ -1,3 +1,7 @@
+local project_id = vim.env.GOOGLE_CLOUD_PROJECT
+local location = vim.env.GOOGLE_CLOUD_LOCATION
+local endpoint = project_id and location and string.format("https://aiplatform.googleapis.com/v1/projects/%s/locations/%s/publishers/google/models", project_id, "us-central1") or nil
+
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
@@ -7,10 +11,10 @@ return {
     provider = "vertex",
     providers = {
       vertex = {
-        endpoint = "https://LOCATION-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/publishers/google/models",
-        project_id = "evapeople-sandbox",
-        location = "us-central1",
-        model = "gemini-1.5-flash-002",
+        endpoint = endpoint,
+        project_id = project_id,
+        location = location,
+        model = "gemini-3.1-pro-preview",
         timeout = 30000, -- Timeout in milliseconds
         temperature = 0,
         max_tokens = 8192,
@@ -18,10 +22,11 @@ return {
     },
     behaviour = {
       auto_suggestions = false, -- Optional: set to true if you want auto-suggestions
-      auto_set_highlight_group = true,
-      auto_set_keymaps = true,
+      auto_set_highlight_group = false,
+      auto_set_keymaps = false,
       auto_apply_diff_after_generation = false,
       support_paste_from_clipboard = false,
+      enable_token_counting = false,
     },
     mappings = {
       --- @class AvanteConflictMappings

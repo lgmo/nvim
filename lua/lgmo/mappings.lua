@@ -2,7 +2,8 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', '<leader>w', vim.cmd.w, { desc = 'Save file' })
 vim.keymap.set('n', '<leader>q', vim.cmd.q, { desc = 'Close' })
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Worktree view' })
+vim.keymap.set('n', '<leader>pv', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+-- vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Worktree view' })
 
 
 vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Next buffer' })
@@ -127,6 +128,8 @@ local function_like_node_names = {
     'method_definition',
 }
 
+-- Function/Class/Struct moves
+
 vim.keymap.set('n', ']f', function()
     local count = vim.v.count1
     for _ = 1, count do
@@ -187,7 +190,7 @@ vim.keymap.set('n', ']c', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'end_row'
         )
     end
@@ -197,7 +200,7 @@ vim.keymap.set('n', '[c', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'start_row'
         )
     end
@@ -207,7 +210,7 @@ vim.keymap.set('v', ']c', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'end_row'
         )
     end
@@ -217,7 +220,7 @@ vim.keymap.set('v', '[c', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'start_row'
         )
     end
@@ -227,7 +230,7 @@ vim.keymap.set('n', '<leader>cn', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_next_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'start_row'
         )
     end
@@ -237,7 +240,7 @@ vim.keymap.set('n', '<leader>cp', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_prev_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'start_row'
         )
     end
@@ -248,7 +251,7 @@ vim.keymap.set('v', '<leader>cn', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_next_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'start_row'
         )
     end
@@ -258,7 +261,7 @@ vim.keymap.set('v', '<leader>cp', function()
     local count = vim.v.count1
     for _ = 1, count do
         ts_move_prev_helper(
-            { 'class_definition' },
+            { 'class_definition', 'struct_definition', 'struct_declaration' },
             'start_row'
         )
     end
