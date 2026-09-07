@@ -33,9 +33,7 @@ function find_in_list(val, list)
 end
 
 function ts_move_helper(node_types, move_type)
-    local ts_utils = require 'nvim-treesitter.ts_utils'
-
-    local node = ts_utils.get_node_at_cursor()
+    local node = vim.treesitter.get_node()
 
     while node do
         if find_in_list(node:type(), node_types) then
@@ -53,8 +51,7 @@ function ts_move_helper(node_types, move_type)
 end
 
 function next_matching_node(node_types)
-    local ts_utils = require 'nvim-treesitter.ts_utils'
-    local node = ts_utils.get_node_at_cursor()
+    local node = vim.treesitter.get_node()
     if not node then return nil end
 
     local root = node:root()
@@ -87,8 +84,7 @@ function ts_move_next_helper(node_types, move_type)
 end
 
 function prev_matching_node(node_types)
-    local ts_utils = require 'nvim-treesitter.ts_utils'
-    local node = ts_utils.get_node_at_cursor()
+    local node = vim.treesitter.get_node()
     if not node then return nil end
 
     local root = node:root()

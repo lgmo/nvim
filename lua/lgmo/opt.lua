@@ -31,7 +31,7 @@ vim.opt.pumblend = 10
 vim.opt.winblend = 0
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = ''
-vim.opt.lazyredraw = true
+vim.opt.lazyredraw = false
 vim.opt.synmaxcol = 300
 
 vim.opt.autoread = true

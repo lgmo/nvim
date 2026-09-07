@@ -14,7 +14,7 @@ vim.api.nvim_create_user_command(
     'ChangeNumber',
     function(_)
         if (vim.opt.relativenumber:get()) then
-            vim.opt.relativenumber = false 
+            vim.opt.relativenumber = false
         else
             vim.opt.relativenumber = true
         end
@@ -59,7 +59,7 @@ vim.api.nvim_create_user_command(
         local dirs = scan_dirs(root)
         for i, dir in ipairs(dirs) do
             -- Remove o prefixo root + o separador de caminho
-            dirs[i] = dir:sub(#root + 2)  -- +2 para remover também a barra (/ ou \)
+            dirs[i] = dir:sub(#root + 2) -- +2 para remover também a barra (/ ou \)
         end
 
         pickers.new({}, {
@@ -84,13 +84,18 @@ vim.api.nvim_create_user_command(
 )
 
 vim.api.nvim_create_user_command(
-    'LnesRef',
+    'LinesRef',
     function(opts)
         local file = vim.fn.expand('%')
         local start_ln = opts.line1
         local end_ln = opts.line2
-        
-        local res = string.format("%s: lines %d to %d", file, start_ln, end_ln)
+
+        local res
+        if start_ln == end_ln then
+            res = string.format("%s:%d", file, start_ln)
+        else
+            res = string.format("%s:%d-%d", file, start_ln, end_ln)
+        end
         vim.fn.setreg('+', res)
         print("Copiado: " .. res)
     end,
